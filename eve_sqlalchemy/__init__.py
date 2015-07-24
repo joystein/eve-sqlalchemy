@@ -6,7 +6,7 @@
     :license: BSD, see LICENSE for more details.
 """
 
-__version__ = '0.1-dev'
+__version__ = '0.4.0a2.dev0'
 
 import simplejson as json
 import flask.ext.sqlalchemy as flask_sqlalchemy
