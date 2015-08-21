@@ -14,6 +14,8 @@ import flask.ext.sqlalchemy as flask_sqlalchemy
 from flask import abort
 from copy import copy
 
+from eve import Eve
+
 from eve.io.base import ConnectionException
 from eve.io.base import DataLayer
 from eve.utils import config, debug_error_message, str_to_date
