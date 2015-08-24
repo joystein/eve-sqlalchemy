@@ -19,6 +19,7 @@ EVE = 4
 THIS_DIRECTORY = os.path.dirname(os.path.realpath(__file__))
 SETTINGS_FILE = os.path.join(THIS_DIRECTORY, 'test_settings_sql.py')
 
+
 class TestBaseSQL(TestMinimal):
 
     test_sql_tables = test_sql_tables
