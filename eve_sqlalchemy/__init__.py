@@ -346,7 +346,7 @@ class SQL(DataLayer):
 class EveSqlalchemy(Eve):
     """
     EveSqlalchemy
-    
+
     Code that is typically common for eve-sqlalchemy APIs and/or code that should be upstreamed to
     eve.
     """
