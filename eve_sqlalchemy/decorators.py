@@ -20,14 +20,21 @@ from .utils import dict_update
 
 __all__ = ['registerSchema']
 
+class LargeBinaryRef(types.String):
+    pass
 
-sqla_type_mapping = {types.Integer: 'integer',
-                     types.Float: 'float',
-                     types.Boolean: 'boolean',
-                     types.Date: 'datetime',
-                     types.DateTime: 'datetime',
-                     types.DATETIME: 'datetime',
-                     sqlalchemy.dialects.postgresql.JSON: 'json'}
+sqla_type_mapping = {
+    types.Integer: 'integer',
+    types.Float: 'float',
+    types.Boolean: 'boolean',
+    types.Date: 'datetime',
+    types.DateTime: 'datetime',
+    types.DATETIME: 'datetime',
+    types.BLOB: 'media',
+    types.LargeBinary: 'media',
+    LargeBinaryRef: 'media',
+    sqlalchemy.dialects.postgresql.JSON: 'json'
+}
 # TODO: Add the remaining sensible SQL types
 
 
