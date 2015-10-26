@@ -1,10 +1,22 @@
 Changelog
 ---------
 
-0.4.0a2 (unreleased)
+0.4.0a4 (unreleased)
 ~~~~~~~~~~~~~~~~~~~~
 
 - Nothing changed yet.
+
+
+0.4.0a3 (2015-10-20)
+~~~~~~~~~~~~~~~~~~~~
+
+- `hybrid_properties` are now readonly in Eve schema [amleczko]
+
+
+0.4.0a2 (2015-09-17)
+~~~~~~~~~~~~~~~~~~~~
+
+- PUT drops/recreates item in the same transaction [goneri]
 
 
 0.4.0a1 (2015-06-18)
