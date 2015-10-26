@@ -41,7 +41,7 @@ class TestBaseSQL(TestMinimal):
             ('/%s' % self.domain[self.known_resource]['url'])
         self.unknown_resource = 'unknown'
         self.unknown_resource_url = '/%s' % self.unknown_resource
-        self.unknown_item_id = '83542635967'
+        self.unknown_item_id = 83542635967
         self.unknown_item_name = 'unknown'
         self.unknown_item_id_url = \
             ('/%s/%s' % (self.domain[self.known_resource]['url'],
@@ -95,6 +95,7 @@ class TestBaseSQL(TestMinimal):
 
     def setupDB(self):
         self.connection = self.app.data.driver
+        self.connection.session.execute('pragma foreign_keys=on')
         self.connection.drop_all()
         self.connection.create_all()
         self.bulk_insert()

@@ -17,20 +17,35 @@ class TestPutSQL(TestBaseSQL):
         self.assert405(status)
 
     def test_unknown_id(self):
-        _, status = self.put(self.unknown_item_id_url, data={'key1': 'value1'})
+        old_upsert_on_put = self.app.config['UPSERT_ON_PUT']
+        self.app.config['UPSERT_ON_PUT'] = False
+        _, status = self.put(self.unknown_item_id_url,
+                             data={'firstname': 'value1'})
         self.assert404(status)
 
+        self.app.config['UPSERT_ON_PUT'] = old_upsert_on_put
+        _, status = self.put(self.unknown_item_id_url,
+                             data={'firstname': 'value1'})
+        self.assert201(status)
+
     def test_unknown_id_different_resource(self):
+        old_upsert_on_put = self.app.config['UPSERT_ON_PUT']
+        self.app.config['UPSERT_ON_PUT'] = False
         # replacing a 'user' with a valid 'contact' id will 404
         _, status = self.put('%s/%s/' % (self.different_resource,
                                          self.unknown_item_id),
                              data={'firstname': 'doug'})
         self.assert404(status)
+        self.app.config['UPSERT_ON_PUT'] = old_upsert_on_put
+        _, status = self.put('%s/%s/' % (self.different_resource,
+                                         self.unknown_item_id),
+                             data={'firstname': 'doug'})
+        self.assert201(status)
 
         # of course we can still put a 'user'
         _, status = self.put('%s/%s/' % (self.different_resource,
                                          self.user_id),
-                             data={'firstname': 'doug'},
+                             data={'firstname': 'jim'},
                              headers=[('If-Match', self.user_etag)])
         self.assert200(status)
 
@@ -95,6 +110,21 @@ class TestPutSQL(TestBaseSQL):
         r = self.perform_put(changes)
         db_value = self.compare_put_with_get(field, r)
         self.assertEqual(db_value, test_value)
+
+    def test_put_with_fk_constraint(self):
+        # notes.people_id FK should not block the PUT on
+        # /people/1
+        headers = [('Content-Type', 'application/json')]
+        data = json.dumps([{'people_id': 1, 'content': 'blabla'}])
+        r = self.test_client.post('/notes', data=data,
+                                  headers=headers)
+        self.assert201(r.status_code)
+        field = "firstname"
+        test_value = "Douglas"
+        changes = {field: test_value}
+        _, status = self.put(self.item_id_url, data=changes,
+                             headers=[('If-Match', self.item_etag)])
+        self.assert200(status)
 
     def test_put_with_post_override(self):
         # POST request with PUT override turns into a PUT
@@ -226,9 +256,9 @@ class TestEventsSQL(TestBaseSQL):
         def filter_this(resource, request, lookup):
             lookup["_id"] = self.unknown_item_id
         self.app.on_pre_PUT += filter_this
-        # Would normally delete the known document; will return 404 instead.
+        # Would normally delete the known document; will create a new instead.
         r, s = self.parse_response(self.put())
-        self.assert404(s)
+        self.assert201(s)
 
     def test_on_post_PUT(self):
         devent = DummyEvent(self.after_replace)

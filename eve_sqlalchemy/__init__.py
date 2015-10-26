@@ -207,7 +207,6 @@ class SQL(DataLayer):
         if old_model_instance is None:
             abort(500, description=debug_error_message('Object not existent'))
         self.driver.session.delete(old_model_instance)
-        self.driver.session.commit()
 
         # create and insert the new one
         model_instance = model(**document)
@@ -330,6 +329,8 @@ class SQL(DataLayer):
 
         .. versionadded:: 0.4
         """
+        if hasattr(DataLayer, '_client_projection'):
+            return super(SQL, self)._client_projection(req)
         client_projection = {}
         if req and req.projection:
             try:
