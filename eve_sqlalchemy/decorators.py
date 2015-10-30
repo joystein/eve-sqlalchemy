@@ -29,7 +29,9 @@ sqla_type_mapping = {
     types.DATETIME: 'datetime',
     types.PickleType: None,
     types.JSON: 'json',
-    postgresql.JSON: 'json'
+    postgresql.JSON: 'json',
+    types.BLOB: 'media',
+    types.LargeBinary: 'media',
 }
 
 
