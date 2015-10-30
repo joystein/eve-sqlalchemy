@@ -16,6 +16,7 @@ import copy
 
 from cerberus import Validator
 from eve.utils import config, str_type
+from werkzeug.datastructures import FileStorage
 from eve.versioning import (
     get_data_version_relation_document, missing_version_field,
 )
@@ -172,3 +173,13 @@ class ValidatorSQL(Validator):
             err = self._errors[field]
             if not isinstance(err, list):
                 self._errors[field] = [err]
+
+    def _validate_type_media(self, field, value):
+        """ Enables validation for `media` data type.
+
+        :param field: field name.
+        :param value: field value.
+
+        """
+        if not isinstance(value, FileStorage):
+            self._error(field, "file was expected, got '%s' instead." % value)
