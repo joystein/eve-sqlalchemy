@@ -34,7 +34,17 @@ class SQLBlobMediaStorage(MediaStorage):
         returned file is guaranteed to be a File object, it might actually be
         some subclass. Returns None if no file was found.
         """
-        return BytesIO(base64.b64encode(content))
+        
+        byte_stream = BytesIO(content)
+        
+        # Monkey patch EXTENDED_MEDIA_INFO attributes onto the byte stream object..
+        #byte_stream.content_type = mimetypes.guess_type(filename)[0]
+        byte_stream.content_type = "text/plain"
+        #byte_stream.name = filename
+        byte_stream.name = "filename.ext"
+        byte_stream.length = len(content)
+        
+        return byte_stream
     
     def put(self, content, filename=None, content_type=None, resource=None):
         """
