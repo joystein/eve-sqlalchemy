@@ -100,7 +100,7 @@ class TestBase(eve.tests.TestBase, TestMinimal):
     def _filter_keys_by_schema(self, dict_, resource):
         allowed_keys = self.app.config['DOMAIN'][resource]['schema'].keys()
         keys = set(dict_.keys()) & set(allowed_keys)
-        return {key: dict_[key] for key in keys}
+        return dict([(key, dict_[key]) for key in keys])
 
     def random_payments(self, num):
         payments = super(TestBase, self).random_payments(num)

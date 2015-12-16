@@ -78,7 +78,7 @@ def _sanitize_value(value):
     if isinstance(value.__class__, DeclarativeMeta):
         return _get_id(value)
     elif isinstance(value, collections.Mapping):
-        return {k: _sanitize_value(v) for k, v in value.items()}
+        return dict([(k, _sanitize_value(v)) for k, v in value.items()])
     elif isinstance(value, collections.MutableSequence):
         return [_sanitize_value(v) for v in value]
     elif isinstance(value, collections.Set):
