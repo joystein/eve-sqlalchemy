@@ -1,21 +1,20 @@
-.. _tutorial:
-
 Tutorial
 ========
 The example app used by this tutorial is available at ``examples`` inside
-Eve repository.
+the Eve-SQLAlchemy repository.
 
 Schema registration
 -------------------
-The main goal of the `SQLAlchemy`_ integration in Eve is to separate dependencies
-and keep model registration depend only on sqlalchemy library. This means that
-you can simply use something like that:
+The main goal of the `SQLAlchemy`_ integration in Eve is to separate
+dependencies and keep model registration depend only on sqlalchemy
+library. This means that you can simply use something like that:
 
 .. literalinclude:: ../examples/tables.py
    :lines: 6-19,34-40,46-
 
-We have used ``CommonColumns`` abstract class to provide attributes used by Eve,
-such us ``_created`` and ``_updated``, but you are not forced to used them:
+We have used ``CommonColumns`` abstract class to provide attributes used by
+Eve, such us ``_created`` and ``_updated``, but you are not forced to used
+them:
 
 .. literalinclude:: ../examples/tables.py
    :lines: 20-24
@@ -23,16 +22,16 @@ such us ``_created`` and ``_updated``, but you are not forced to used them:
 
 Eve settings
 ------------
-All standard Eve settings will work with `SQLAlchemy`_ support. However, you need
-manually decide which `SQLAlchemy`_ declarative classes you wish to register.
-You can do it using ``registerSchema``:
+All standard Eve settings will work with `SQLAlchemy`_ support. However, you
+need manually decide which `SQLAlchemy`_ declarative classes you wish to
+register.  You can do it using ``registerSchema``:
 
 .. literalinclude:: ../examples/settings.py
    :lines: 9-13, 25-29
 
 As you noticed the schema will be stored inside `_eve_schema` class attribute
-so it can be easily used. You can of course extend the autogenerate schema
-with your custom options:
+so it can be easily used. You can of course extend the autogenerate schema with
+your custom options:
 
 .. literalinclude:: ../examples/settings.py
    :lines: 31-
@@ -40,12 +39,10 @@ with your custom options:
 
 Authentication example
 ----------------------
-This example is based on the Token-Based tutorial from `Eve Authentication`_. 
+This example is based on the Token-Based tutorial from `Eve Authentication`_.
 First we need to create eve-side authentication:
 
 .. code-block:: python
-
-    # -*- coding: utf-8 -*-
 
     """
     Auth-Token
@@ -86,8 +83,6 @@ First we need to create eve-side authentication:
 Next step is the `User` SQLAlchemy model:
 
 .. code-block:: python
-
-    # -*- coding: utf-8 -*-
 
     """
     Auth-Token
@@ -177,8 +172,6 @@ And finally a flask login view:
 
 .. code-block:: python
 
-    # -*- coding: utf-8 -*-
-
     """
     Auth-Token
     ~~~~~~~~~~
@@ -241,7 +234,8 @@ and start it:
     $ python sqla_example.py
      * Running on http://127.0.0.1:5000/
 
-and check that everything is working like expected, by trying requesting `people`:
+and check that everything is working like expected, by trying requesting
+`people`:
 
 .. code-block:: console
 
@@ -284,12 +278,12 @@ You can do this by subclassing ``SQL`` and overriding the driver.
 
    from eve_sqlalchemy import SQL as _SQL
    from flask_sqlalchemy import SQLAlchemy
-   
+
    db = SQLAlchemy(app)
-   
+
    class SQL(_SQL):
       driver = db
-   
+
    app = Eve(validator=ValidatorSQL, data=SQL)
 
 SQLAlchemy expressions
@@ -297,8 +291,8 @@ SQLAlchemy expressions
 With this version of Eve you can use `SQLAlchemy`_ expressions such as: `like`,
 `in`, `any`, etc. For more examples please check `SQLAlchemy internals`_.
 
-Using those expresssion is straightforward (you can use them only with dictionary
-where filter):
+Using those expresssion is straightforward (you can use them only with
+dictionary where filter):
 
 .. code-block:: console
 
@@ -360,10 +354,11 @@ which produces where closure:
 
 SQLAlchemy sorting
 ------------------
-Starting from version 0.2 you can use `SQLAlchemy ORDER BY`_ expressions such as: `nullsfirst`,
-`nullslast`, etc.
+Starting from version 0.2 you can use `SQLAlchemy ORDER BY`_ expressions such
+as: `nullsfirst`, `nullslast`, etc.
 
-Using those expresssion is straightforward, just pass it as 3 argument to sorting:
+Using those expresssion is straightforward, just pass it as 3 argument to
+sorting:
 
 .. code-block:: console
 
@@ -384,9 +379,9 @@ You can also support the following python-Eve syntax:
 How to adjust the primary column name
 -------------------------------------
 
-Eve use the `_id` column as primary id field. This is the default value of the MongoDB database.
-In SQL, it much more common to call this column just `id`. You can do that with the following
-change in your `settings.py`:
+Eve use the `_id` column as primary id field. This is the default value of the
+MongoDB database.  In SQL, it much more common to call this column just
+`id`. You can do that with the following change in your `settings.py`:
 
 .. code-block:: python
 
@@ -406,17 +401,20 @@ change in your `settings.py`:
 Embedded resources
 ------------------
 
-Eve-SQLAlchemy support the embedded keyword of python-eve ( `Eve Embedded Resource Serialization`_ ).
+Eve-SQLAlchemy support the embedded keyword of python-eve (`Eve Embedded
+Resource Serialization`_).
 
 .. code-block:: console
 
     http://127.0.0.1:5000/people?embedded={"address":1}
 
-For example, the following request will list the people and embedded their addresses.
+For example, the following request will list the people and embedded their
+addresses.
 
-Starting from version 0.4.0a, only the fields that have the projection (`Eve Projections`) enabled are included
-in the associated resource. This was necessary to avoid endless loop when relationship between resources were
-refeering each others.
+Starting from version 0.4.0a, only the fields that have the projection (`Eve
+Projections`_) enabled are included in the associated resource. This was
+necessary to avoid endless loops when relationship between resources were
+referring each other.
 
 
 .. _SQLAlchemy: http://www.sqlalchemy.org/

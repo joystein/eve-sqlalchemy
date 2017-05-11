@@ -1,22 +1,27 @@
-Eve-SQLAlchemy is written and maintained by Andrew Mleczko and
-various contributors:
+Eve-SQLAlchemy was originally written and maintained by Andrew Mleczko and
+is now maintained by Dominik Kellner.
 
 Development Lead
 ````````````````
 
-- Andrew Mleczko <amleczko@redturtle.it>
+- since 2016: Dominik Kellner <dkellner@dkellner.de>
+- 2015 - 2016: Andrew Mleczko <amleczko@redturtle.it>
 
-Patches and Contributions
-`````````````````````````
+Patches and Contributions (in alphabetical order)
+`````````````````````````````````````````````````
 
-- Tomasz Jezierski (Tefnet)
+- Alex Kerney
 - Bruce Frederiksen
+- Conrad Burchert
+- Cuong Manh Le
+- David Durieux
+- Dominik Kellner
+- Goneri Le Bouder
 - Jacopo Sabbatini
+- Kevin Roy
+- Leonidaz0r
+- Mario Kralj
 - Nicola Iarocci
 - Peter Zinng
-- Conrad Burchert
-- Leonidaz0r
-- David Durieux
-- Kevin Roy
-- Alex Kerney
-- Goneri Le Bouder
+- Tomasz Jezierski (Tefnet)
+- Øystein S. Haaland

@@ -1,20 +1,12 @@
 ''' Trivial Eve-SQLAlchemy example. '''
-# SQLAlchemy Imports
+from eve import Eve
+from sqlalchemy import Column, Integer, String
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import column_property
-from sqlalchemy import (
-    Column,
-    String,
-    Integer,
-    )
 
-# Eve imports
-from eve import Eve
 from eve_sqlalchemy import SQL
-from eve_sqlalchemy.validation import ValidatorSQL
-
-# Eve-SQLAlchemy imports
 from eve_sqlalchemy.decorators import registerSchema
+from eve_sqlalchemy.validation import ValidatorSQL
 
 Base = declarative_base()
 
@@ -31,6 +23,7 @@ class People(Base):
         """Helper method to populate the db"""
         return cls(firstname=data[0], lastname=data[1])
 
+
 registerSchema('people')(People)
 
 SETTINGS = {
@@ -38,7 +31,7 @@ SETTINGS = {
     'SQLALCHEMY_DATABASE_URI': 'sqlite://',
     'DOMAIN': {
         'people': People._eve_schema['people'],
-        }
+    }
 }
 
 app = Eve(auth=None, settings=SETTINGS, validator=ValidatorSQL, data=SQL)
@@ -63,4 +56,4 @@ if not db.session.query(People).count():
     db.session.commit()
 
 app.run(debug=True, use_reloader=False)
-# using reloaded will destory in-memory sqlite db
+# using reloader will destroy in-memory sqlite db

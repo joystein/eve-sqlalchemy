@@ -1,10 +1,20 @@
 Changelog
 ---------
 
-0.4.2 (unreleased)
+0.5.0 (unreleased)
 ~~~~~~~~~~~~~~~~~~
 
-- Nothing changed yet.
+- Fix deprecated import warning (#142) [Cuong Manh Le]
+- Configure `zest.releaser` for release management (#137)
+  [Dominik Kellner, Øystein S. Haaland]
+- Leverage further automated syntax and formatting checks (#138)
+  [Dominik Kellner]
+- Clean up specification of dependencies [Dominik Kellner]
+- Added 'Contributing' section to docs (#129) [Mario Kralj]
+- Fix trivial app output in documentation (#131) [Michal Vlasák]
+- Added dialect-specific PostgreSQL JSON type (#133) [Mario Kralj]
+- Fix url field in documentation about additional lookup (#110) [Killian Kemps]
+- Compatibility with Eve 0.6.4 and refactoring of tests (#92) [Dominik Kellner]
 
 
 0.4.1 (2015-12-16)
@@ -50,7 +60,8 @@ Changelog
 0.3.2 (2015-05-01)
 ~~~~~~~~~~~~~~~~~~
 
-- add fallback on attr.op if the operator doesn't exists in the `ColumnProperty` [Kevin Roy]
+- add fallback on attr.op if the operator doesn't exists in the
+  `ColumnProperty` [Kevin Roy]
 - add support for PostgreSQL JSON type [Goneri Le Bouder]
 
 
@@ -63,7 +74,8 @@ Changelog
 0.3 (2015-04-17)
 ~~~~~~~~~~~~~~~~
 
-- return everything as dicts instead of SQLAResult, remove SQLAResult [Leonidaz0r]
+- return everything as dicts instead of SQLAResult, remove SQLAResult
+  [Leonidaz0r]
 - fix update function, this closes #22 [David Durieux]
 - fixed replaced method, we are compatible with Eve>=0.5.1 [Kevin Roy]
 - fixed jsonify function [Leonidaz0r]
@@ -82,9 +94,9 @@ Changelog
 ~~~~~~~~~~~~~~~~
 
 - various bugfixing [Arie Brosztein, toxsick]
-- refactor sorting parser, add sql order by expresssions;
-  please check http://eve-sqlalchemy.readthedocs.org/#sqlalchemy-sorting 
-  for more details [amleczko]
+- refactor sorting parser, add sql order by expresssions; please check
+  http://eve-sqlalchemy.readthedocs.org/#sqlalchemy-sorting for more details
+  [amleczko]
 
 
 0.1 (2015-01-13)

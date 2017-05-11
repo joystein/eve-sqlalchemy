@@ -1,9 +1,7 @@
-.. _trivial_example:
-
 Simple example
 ==============
 
-Create a file, called trivial.py, and inclue the following:
+Create a file, called trivial.py, and include the following:
 
 .. literalinclude:: ../examples/trivial.py
 
@@ -13,7 +11,7 @@ Run this command to start the server:
 
     python trivial.py
 
-Open the following in your browser to confirm that the server is serving: 
+Open the following in your browser to confirm that the server is serving:
 
 .. code-block:: console
 
@@ -24,7 +22,6 @@ You will see something like this:
 .. code-block:: xml
 
     <resource>
-        <link rel="child" href="invoices" title="invoices"/>
         <link rel="child" href="people" title="people"/>
     </resource>
 
@@ -51,4 +48,3 @@ You will see the three records we preloaded.
         <id>1</id>
         <lastname>Washington</lastname>
     </resource>
-
